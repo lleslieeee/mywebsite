@@ -5,16 +5,73 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Titolo della Pagina</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #333;
+            color: white;
+            width: 200px;
+            height: 100%;
+            padding: 20px;
+            z-index: 999;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        nav a:hover {
+            color: yellow;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .menu-toggle.checked + nav {
+                display: block;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>Titolo Principale</h1>
+        <div class="menu-toggle">&#9776;</div>
         <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Servizi</a></li>
-                <li><a href="#">Contatti</a></li>
-            </ul>
+            <a href="#">Home</a>
+            <a href="#">Servizi</a>
+            <a href="#">Contatti</a>
         </nav>
     </header>
     
@@ -33,5 +90,11 @@
     <footer>
         <p>&copy; Anno - Nome del Tuo Sito</p>
     </footer>
+
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            this.classList.toggle('checked');
+        });
+    </script>
 </body>
 </html>
