@@ -6,7 +6,7 @@ You make choices at each step, and the story changes based on your decisions. It
 
 ## How to Play
 
-1. Open the website: [Live Story](https://<your-username>.github.io/my-story/)
+1. Open the website: [Live Story]((https://lleslieeee.github.io/mywebsite/))
 2. Read the story text on the screen.
 3. Click one of the buttons to make a choice.
 4. Follow the story until you reach an ending.
