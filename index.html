@@ -7,13 +7,13 @@
   <style>
     body {
       margin: 0;
-      font-family: Times, times-new-roman;
+      font-family: "Times New Roman", Times, serif; /* fixed font */
     }
 
     header {
       background-color: #333;
       color: white;
-      padding: 16px 20px; /* slightly taller */
+      padding: 16px 20px; /* slightly taller header */
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -41,15 +41,26 @@
       color: yellow;
     }
 
-    /* Hamburger Icon */
+    /* Hide hamburger icon by default on desktop */
     .menu-toggle {
-      font-size: 24px; /* a bit smaller */
+      display: none;
+      font-size: 24px;
       cursor: pointer;
       user-select: none;
       z-index: 1100;
+      color: white;
     }
 
     @media screen and (max-width: 768px) {
+      /* Show hamburger only on mobile */
+      .menu-toggle {
+        display: block;
+        position: fixed;
+        top: 10px;
+        right: 18px;
+        font-size: 22px;
+      }
+
       nav {
         position: fixed;
         top: 0;
@@ -60,7 +71,7 @@
         padding: 60px 20px;
         flex-direction: column;
         gap: 10px;
-        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.4);
+        box-shadow: -2px 0 10px rgba(0,0,0,0.4);
         transform: translateX(100%);
         opacity: 0;
         pointer-events: none;
@@ -71,14 +82,6 @@
         transform: translateX(0);
         opacity: 1;
         pointer-events: all;
-      }
-
-      .menu-toggle {
-        position: fixed;
-        top: 10px; /* slightly higher */
-        right: 18px;
-        font-size: 22px; /* smaller on mobile */
-        color: white;
       }
     }
 
