@@ -39,7 +39,6 @@
       color: yellow;
     }
 
-    /* Hamburger Icon */
     .menu-toggle {
       display: none;
       font-size: 28px;
@@ -77,6 +76,18 @@
 
     main {
       padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 70vh;
+    }
+
+    .test-box {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
     }
 
     footer {
@@ -98,15 +109,7 @@
   </header>
 
   <main>
-    <section>
-      <h2>Sezione 1</h2>
-      <p>Testo della sezione 1...</p>
-    </section>
-
-    <section>
-      <h2>Sezione 2</h2>
-      <p>Testo della sezione 2...</p>
-    </section>
+    <div class="test-box"></div>
   </main>
 
   <footer>
@@ -118,12 +121,10 @@
     const nav = document.querySelector('nav');
     const links = document.querySelectorAll('nav a');
 
-    // Toggle menu
     menuToggle.addEventListener('click', () => {
       nav.classList.toggle('active');
     });
 
-    // Close menu when clicking a link (mobile UX)
     links.forEach(link => {
       link.addEventListener('click', () => {
         nav.classList.remove('active');
