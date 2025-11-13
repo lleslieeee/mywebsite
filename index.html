@@ -17,6 +17,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
+      z-index: 1000; /* keeps above the nav */
     }
 
     h1 {
@@ -39,11 +41,12 @@
       color: yellow;
     }
 
+    /* Hamburger Icon */
     .menu-toggle {
-      display: none;
       font-size: 28px;
       cursor: pointer;
       user-select: none;
+      z-index: 1100;
     }
 
     @media screen and (max-width: 768px) {
@@ -61,6 +64,7 @@
         transform: translateX(100%);
         opacity: 0;
         pointer-events: none;
+        z-index: 1000;
       }
 
       nav.active {
@@ -70,7 +74,10 @@
       }
 
       .menu-toggle {
-        display: block;
+        position: fixed;
+        top: 15px;
+        right: 20px;
+        color: white;
       }
     }
 
