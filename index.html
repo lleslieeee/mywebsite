@@ -27,6 +27,7 @@
     nav {
       display: flex;
       gap: 15px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
     }
 
     nav a {
@@ -41,14 +42,13 @@
     /* Hamburger Icon */
     .menu-toggle {
       display: none;
-      font-size: 24px;
+      font-size: 28px;
       cursor: pointer;
       user-select: none;
     }
 
     @media screen and (max-width: 768px) {
       nav {
-        display: none;
         position: fixed;
         top: 0;
         right: 0;
@@ -59,10 +59,15 @@
         flex-direction: column;
         gap: 10px;
         box-shadow: -2px 0 10px rgba(0, 0, 0, 0.4);
+        transform: translateX(100%);
+        opacity: 0;
+        pointer-events: none;
       }
 
       nav.active {
-        display: flex;
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: all;
       }
 
       .menu-toggle {
@@ -111,9 +116,18 @@
   <script>
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('nav');
+    const links = document.querySelectorAll('nav a');
 
+    // Toggle menu
     menuToggle.addEventListener('click', () => {
       nav.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link (mobile UX)
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+      });
     });
   </script>
 </body>
