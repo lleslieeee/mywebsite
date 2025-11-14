@@ -1,146 +1,19 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Website</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Times New Roman", Times, serif; /* fixed font */
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
-    header {
-      background-color: #333;
-      color: white;
-      padding: 16px 20px; /* slightly taller header */
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      z-index: 1000;
-    }
-
-    h1 {
-      font-size: 1.5rem;
-      margin: 0;
-    }
-
-    nav {
-      display: flex;
-      gap: 15px;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-    }
-
-    nav a:hover {
-      color: yellow;
-    }
-
-    /* Hide hamburger icon by default on desktop */
-    .menu-toggle {
-      display: none;
-      font-size: 24px;
-      cursor: pointer;
-      user-select: none;
-      z-index: 1100;
-      color: white;
-    }
-
-    @media screen and (max-width: 768px) {
-      /* Show hamburger only on mobile */
-      .menu-toggle {
-        display: block;
-        position: fixed;
-        top: 10px;
-        right: 18px;
-        font-size: 22px;
-      }
-
-      nav {
-        position: fixed;
-        top: 0;
-        right: 0;
-        background-color: #333;
-        width: 200px;
-        height: 100%;
-        padding: 60px 20px;
-        flex-direction: column;
-        gap: 10px;
-        box-shadow: -2px 0 10px rgba(0,0,0,0.4);
-        transform: translateX(100%);
-        opacity: 0;
-        pointer-events: none;
-        z-index: 1000;
-      }
-
-      nav.active {
-        transform: translateX(0);
-        opacity: 1;
-        pointer-events: all;
-      }
-    }
-
-    main {
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 70vh;
-    }
-
-    .test-box {
-      width: 200px;
-      height: 200px;
-      background-color: red;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
-    }
-
-    footer {
-      text-align: center;
-      padding: 15px;
-      background: #f4f4f4;
-    }
-  </style>
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>MyStory</h1>
-    <div class="menu-toggle">&#9776;</div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Servizi</a>
-      <a href="#">Contatti</a>
-    </nav>
-  </header>
 
-  <main>
-    <div class="test-box"></div>
-  </main>
+    <!-- Your page content here -->
+    <h1>Hello World</h1>
 
-  <footer>
-    <p>&copy; 2025 - MyWebsite</p>
-  </footer>
-
-  <script>
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav');
-    const links = document.querySelectorAll('nav a');
-
-    menuToggle.addEventListener('click', () => {
-      nav.classList.toggle('active');
-    });
-
-    links.forEach(link => {
-      link.addEventListener('click', () => {
-        nav.classList.remove('active');
-      });
-    });
-  </script>
+    <!-- Link to your JavaScript file -->
+    <script src="script.js"></script>
 </body>
 </html>
