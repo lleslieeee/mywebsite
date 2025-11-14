@@ -17,7 +17,7 @@ An **interactive choose-your-own-adventure story** built with HTML, CSS, and Jav
 - [How to Play](#-how-to-play)  
 - [Features](#-features)  
 - [Story Paths](#-story-paths-preview)  
-- [Customization](#-customization)  
+- [Customization](#%EF%B8%8F-customization)  
 - [Contributing](#-contributing)  
 - [License](#-license)
 
