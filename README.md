@@ -16,10 +16,11 @@ An **interactive choose-your-own-adventure story** built with HTML, CSS, and Jav
 - [Live Demo](#-live-demo)  
 - [How to Play](#-how-to-play)  
 - [Features](#-features)  
-- [Story Paths](#-story-paths)  
-- [Customization](#-customization)  
+- [Story Paths](#story-paths-preview)  
+- [Customization](#customization)  
 - [Contributing](#-contributing)  
-- [License](#-license)  
+- [License](#-license)
+
 
 ---
 
