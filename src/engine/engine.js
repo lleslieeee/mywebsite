@@ -21,15 +21,13 @@ document.getElementById("credits").addEventListener("click", () => {
 
 // Exit with animation
 document.getElementById("exit").addEventListener("click", () => {
-    const menu = document.getElementById("main-menu");
-    menu.style.transition = "transform 0.5s, opacity 0.5s";
-    menu.style.transform = "scale(0)";
-    menu.style.opacity = "0";
+    document.body.style.transition = "opacity 0.5s";
+    document.body.style.opacity = "0"; // fade out the whole page
     setTimeout(() => {
-        window.close(); // may not work in some browsers
-        document.body.innerHTML = "<h1>Goodbye!</h1>"; // fallback
+        document.body.innerHTML = ""; // clear everything after fade
     }, 500);
 });
+
 
 // Return to Menu from ending
 document.getElementById("return-menu").addEventListener("click", () => {
