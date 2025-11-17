@@ -13,14 +13,13 @@ An **interactive choose-your-own-adventure story** built with HTML, CSS, and Jav
 
 ## 📌 Table of Contents
 
-- [Live Demo](#-live-demo)  
-- [How to Play](#-how-to-play)  
-- [Features](#-features)  
-- [Story Paths](#-story-paths-preview)  
-- [Customization](#%EF%B8%8F-customization)  
-- [Contributing](#-contributing)  
-- [License](#-license)
-
+- 🌐 [Live Demo](#-live-demo)  
+- 🎮 [How to Play](#-how-to-play)  
+- ✨ [Features](#-features)  
+- 📖 [Story Paths Preview](#-story-paths-preview)  
+- 🛠️ [Customization](#%EF%B8%8F-customization)    
+- 🤝 [Contributing](#-contributing)  
+- 📄 [License](#-license)
 
 ---
 
