@@ -25,7 +25,7 @@ An **interactive choose-your-own-adventure story** built with HTML, CSS, and Jav
 
 ## 🌐 Live Demo
 
-Try the story online: [Live Story](https://lleslieeee.github.io/mywebsite/)
+Try the story online: [Live Story](https://lleslieeee.github.io/my-vn-game/)
 
 ---
 
