@@ -8,16 +8,36 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="header">My Website</header>
+    <!-- Main Menu -->
+    <div id="main-menu">
+        <div id="menu-buttons">
+            <button id="start-game">Start</button>
+            <button id="continue-game">Continue</button>
+            <button id="settings">Settings</button>
+            <button id="credits">Credits</button>
+            <button id="exit">Exit</button>
+        </div>
+    </div>
 
-    <main class="container">
-        <section class="sidebar">Sidebar</section>
-        <section class="content">Main Content</section>
-    </main>
+    <!-- Gameplay Container -->
+    <div id="gameplay" style="display:none;">
+        <div id="background"></div> <!-- Background image layer -->
+        <div id="character"></div> <!-- Character sprite layer -->
+        <div id="dialogue-box">
+            <p id="dialogue-text"></p> <!-- Text content for dialogue -->
+            <div id="choices"></div> <!-- Buttons for player choices -->
+        </div>
+    </div>
 
-    <footer class="footer">Footer</footer>
+    <!-- Ending Container -->
+    <div id="ending" style="display:none;">
+        <h2>Ending</h2>
+        <p id="ending-text"></p> <!-- Dynamic ending text -->
+        <button id="return-menu">Return to Menu</button>
+    </div>
 
-    <script src="script.js"></script>
+    <script src="engine/script.js"></script>
 </body>
+
 
 </html>
