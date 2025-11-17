@@ -1,1 +1,52 @@
+/* Main menu styling */
+#main-menu {
+    position: fixed;       /* sticks to screen even if scrolling */
+    bottom: 0;
+    right: 0;              /* bottom-right corner */
+    width: 25%;            /* quarter of the screen width */
+    height: 25%;           /* quarter of the screen height */
+    display: flex;         
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.3); /* semi-transparent overlay */
+}
 
+#menu-buttons {
+    display: flex;
+    flex-direction: column; /* vertical stack of buttons */
+    gap: 10px;              /* space between buttons */
+    width: 100%;
+}
+
+#menu-buttons button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    background-color: #222;
+    color: #fff;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+#menu-buttons button:hover {
+    transform: scale(1.05);    /* grow slightly on hover */
+    background-color: #444;    /* darker background on hover */
+}
+
+/* Gameplay containers */
+#gameplay, #ending {
+    width: 100%;
+    height: 100%;
+}
+
+/* Dialogue box (can customize later) */
+#dialogue-box {
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    width: 90%;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
