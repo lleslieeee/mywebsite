@@ -3,9 +3,9 @@
 ![Story Screenshot](screenshot.png) <!-- Replace with your screenshot file -->
 
 [![GitHub issues](https://img.shields.io/github/issues/lleslieeee/my-vn-game)](https://github.com/lleslieeee/mywebsite/issues)
+[![License](https://img.shields.io/github/license/lleslieeee/my-vn-game)](LICENSE)
 [![GitHub forks](https://img.shields.io/github/forks/lleslieeee/my-vn-game)](https://github.com/lleslieeee/mywebsite/network)
 [![GitHub stars](https://img.shields.io/github/stars/lleslieeee/my-vn-game)](https://github.com/lleslieeee/mywebsite/stargazers)
-[![License](https://img.shields.io/github/license/lleslieeee/my-vn-game)](LICENSE)
 
 An **interactive choose-your-own-adventure story** built with HTML, CSS, and JavaScript. Make choices and explore different story paths to reach multiple endings. Perfect for branching narrative experiments or web development practice.
 
