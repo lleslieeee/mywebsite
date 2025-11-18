@@ -1,3 +1,11 @@
+/* === GLOBAL BACKGROUND (always visible behind everything) === */
+#global-bg {
+    position: fixed;
+    inset: 0;
+    background: #999;       /* clean neutral grey */
+    z-index: -10;           /* sits behind everything else */
+}
+
 /* Gameplay UI */
 #ui {
     position: absolute;
@@ -100,4 +108,35 @@
     height: 80%;
     background-size: contain;
     background-repeat: no-repeat;
+}
+
+/* === MENU BUTTONS STYLE === */
+#main-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#menu-buttons button {
+    width: 200px;
+    padding: 12px 20px;
+    font-size: 18px;
+    border: 2px solid #444;
+    background: #eee;
+    color: #222;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#menu-buttons button:hover {
+    background: #ddd;
+    transform: translateY(-2px);
 }

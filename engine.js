@@ -112,10 +112,26 @@ document.getElementById("return-menu").addEventListener("click", () => {
     document.getElementById("main-menu").style.display = "flex";
 });
 
-// Auto-advance toggle
+// ======================================================
+// AUTO-ADVANCE TOGGLE (FULL WORKING VERSION)
+// ======================================================
+
 document.getElementById("auto-toggle").addEventListener("click", () => {
     autoAdvance = !autoAdvance;
-    document.getElementById("auto-toggle").innerText = `Auto-Advance: ${autoAdvance ? "ON" : "OFF"}`;
+
+    document.getElementById("auto-toggle").innerText =
+        `Auto-Advance: ${autoAdvance ? "ON" : "OFF"}`;
+
+    const node = story[currentNode];
+
+    // If turning auto ON → start auto immediately if possible
+    if (autoAdvance && node && !node.choices && node.goto) {
+        clearTimeout(autoTimer);
+        autoTimer = setTimeout(() => loadNode(node.goto), 4000);
+    }
+
+    // If turning auto OFF → cancel pending timer
+    if (!autoAdvance) clearTimeout(autoTimer);
 });
 
 // ======================================================
@@ -135,8 +151,10 @@ function loadNode(nodeId) {
     currentNode = nodeId;
     saveProgress(nodeId);
 
-    if (autoTimer) clearTimeout(autoTimer);
+    // Always clear previous timer
+    clearTimeout(autoTimer);
 
+    // Display content
     document.getElementById("background").style.backgroundImage = node.bg ? `url(${node.bg})` : "";
     document.getElementById("character").style.backgroundImage = node.character ? `url(${node.character})` : "";
     document.getElementById("name-box").innerText = node.name || "";
@@ -145,24 +163,31 @@ function loadNode(nodeId) {
     const choiceBox = document.getElementById("choices");
     choiceBox.innerHTML = "";
 
+    // ========== CHOICE NODES ==========
     if (node.choices) {
         node.choices.forEach((choice, index) => {
             const btn = document.createElement("button");
             btn.innerText = choice.label;
             btn.onclick = () => {
-                if (autoTimer) clearTimeout(autoTimer);
+                clearTimeout(autoTimer);
                 recordChoice(nodeId, index);
                 loadNode(choice.goto);
             };
             choiceBox.appendChild(btn);
         });
-    } else if (node.goto) {
+        return;
+    }
+
+    // ========== AUTO OR NORMAL GOTO ==========
+    if (node.goto) {
         if (autoAdvance) {
             autoTimer = setTimeout(() => loadNode(node.goto), 4000);
         }
-    } else {
-        document.getElementById("gameplay").style.display = "none";
-        document.getElementById("ending").style.display = "block";
-        document.getElementById("ending-text").innerText = node.text || "The End";
+        return;
     }
+
+    // ========== END NODE ==========
+    document.getElementById("gameplay").style.display = "none";
+    document.getElementById("ending").style.display = "block";
+    document.getElementById("ending-text").innerText = node.text || "The End";
 }
