@@ -180,7 +180,7 @@ function loadNode(nodeId) {
         // auto-advance
         setTimeout(() => {
             loadNode(node.goto);
-        }, 1000);
+        }, 4000);
     } 
     
     else {
