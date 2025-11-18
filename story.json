@@ -3,110 +3,160 @@
     "bg": "bg/school.jpg",
     "character": "characters/protagonist_neutral.png",
     "name": "Protagonist",
-    "text": "This is the beginning of your story...",
+    "text": "Another school day begins. Do you head straight to class or skip it?",
     "choices": [
-      { "label": "Go to school", "goto": "branch1" },
-      { "label": "Skip class", "goto": "branch2" },
-      { "label": "Take a different path", "goto": "secret_path" }
+      { "label": "Go to class", "goto": "classroom" },
+      { "label": "Skip class", "goto": "skip_school" },
+      { "label": "Explore the rooftop", "goto": "rooftop" }
     ]
   },
 
-  "branch1": {
+  "classroom": {
     "bg": "bg/classroom.jpg",
     "character": "characters/teacher.png",
     "name": "Teacher",
-    "text": "Welcome to class!",
-    "goto": "ending1"
-  },
-
-  "branch2": {
-    "bg": "bg/office.jpg",
-    "character": "characters/boss_angry.png",
-    "name": "Boss",
-    "text": "Why are you late again?",
-    "goto": "ending2"
-  },
-
-  "secret_path": {
-    "bg": "bg/forest.jpg",
-    "character": "characters/mysterious.png",
-    "name": "???",
-    "text": "You find a strange person waiting for you. They offer you a choice...",
+    "text": "Good morning! Are you ready for the pop quiz?",
     "choices": [
-      { "label": "Follow them to the city", "goto": "extra_ending2" },
-      { "label": "Follow them to the sunset", "goto": "extra_ending1" },
-      { "label": "Ask about the forbidden path", "goto": "dark_branch" }
+      { "label": "Answer carefully", "goto": "quiz_success" },
+      { "label": "Cheat secretly", "goto": "quiz_cheat" }
     ]
   },
 
-  "dark_branch": {
-    "bg": "bg/room_night.jpg",
-    "character": "characters/protagonist_sad.png",
-    "name": "Narrator",
-    "text": "You step into a place where the air feels heavy...",
-    "goto": "extra_ending3"
+  "skip_school": {
+    "bg": "bg/park.jpg",
+    "character": "characters/friend.png",
+    "name": "Friend",
+    "text": "Hey, you skipped class again! Want to grab a snack?",
+    "choices": [
+      { "label": "Yes, let’s go", "goto": "snack_time" },
+      { "label": "No, go wander alone", "goto": "wander_park" }
+    ]
   },
 
-  "ending1": {
+  "rooftop": {
+    "bg": "bg/rooftop.jpg",
+    "character": "characters/mysterious.png",
+    "name": "???",
+    "text": "You find a mysterious note fluttering in the wind.",
+    "choices": [
+      { "label": "Read the note", "goto": "secret_note" },
+      { "label": "Ignore it", "goto": "ignore_note" }
+    ]
+  },
+
+  "quiz_success": {
+    "bg": "bg/classroom.jpg",
+    "character": "characters/protagonist_happy.png",
+    "name": "Narrator",
+    "text": "You answered everything correctly! Feeling proud, you leave school early.",
+    "goto": "ending_success"
+  },
+
+  "quiz_cheat": {
+    "bg": "bg/classroom.jpg",
+    "character": "characters/protagonist_nervous.png",
+    "name": "Narrator",
+    "text": "You tried to cheat, but the teacher caught you. You are sent to detention.",
+    "goto": "ending_detention"
+  },
+
+  "snack_time": {
+    "bg": "bg/cafe.jpg",
+    "character": "characters/friend.png",
+    "name": "Friend",
+    "text": "The cafe smells amazing. You enjoy a peaceful snack together.",
+    "choices": [
+      { "label": "Chat about school", "goto": "chat_school" },
+      { "label": "Chat about hobbies", "goto": "chat_hobbies" }
+    ]
+  },
+
+  "wander_park": {
+    "bg": "bg/park_alone.jpg",
+    "character": "characters/protagonist_neutral.png",
+    "name": "Narrator",
+    "text": "You wander alone and find a quiet spot by the fountain. It's peaceful.",
+    "goto": "ending_peaceful"
+  },
+
+  "chat_school": {
+    "bg": "bg/cafe.jpg",
+    "character": "characters/friend.png",
+    "name": "Friend",
+    "text": "Talking about school makes you realize you need to catch up on assignments.",
+    "goto": "ending_homework"
+  },
+
+  "chat_hobbies": {
+    "bg": "bg/cafe.jpg",
+    "character": "characters/friend.png",
+    "name": "Friend",
+    "text": "You share your hobbies and feel more connected with your friend.",
+    "goto": "ending_friendship"
+  },
+
+  "secret_note": {
+    "bg": "bg/rooftop.jpg",
+    "character": "characters/protagonist_neutral.png",
+    "name": "Narrator",
+    "text": "The note contains a mysterious map. Adventure awaits!",
+    "goto": "ending_adventure"
+  },
+
+  "ignore_note": {
+    "bg": "bg/rooftop.jpg",
+    "character": "characters/protagonist_neutral.png",
+    "name": "Narrator",
+    "text": "You ignore the note and head back inside, nothing exciting happens today.",
+    "goto": "ending_normal"
+  },
+
+  "ending_success": {
     "bg": "bg/graduation.jpg",
     "character": "characters/protagonist_happy.png",
     "name": "Narrator",
-    "text": "You graduated successfully!"
+    "text": "Ending 1: A successful day! You aced everything and feel accomplished."
   },
 
-  "ending2": {
-    "bg": "bg/jail.jpg",
+  "ending_detention": {
+    "bg": "bg/classroom_detention.jpg",
     "character": "characters/protagonist_sad.png",
     "name": "Narrator",
-    "text": "You ended up in jail..."
+    "text": "Ending 2: You got caught and spent the rest of the day in detention."
   },
 
-  "ending3": {
-    "bg": "bg/vegas.jpg",
-    "character": "characters/protagonist_sneaky.png",
+  "ending_peaceful": {
+    "bg": "bg/park_alone.jpg",
+    "character": "characters/protagonist_relaxed.png",
     "name": "Narrator",
-    "text": "You survived the heist and fled the country!"
+    "text": "Ending 3: A quiet, peaceful day alone. Sometimes solitude is best."
   },
 
-  "ending4": {
-    "bg": "bg/prison.jpg",
-    "character": "characters/protagonist_sad.png",
+  "ending_homework": {
+    "bg": "bg/room.jpg",
+    "character": "characters/protagonist_neutral.png",
     "name": "Narrator",
-    "text": "You got caught and served 8 years."
+    "text": "Ending 4: Back home, you start on your homework. Productive and responsible!"
   },
 
-  "ending5": {
-    "bg": "bg/bedroom.jpg",
-    "character": "characters/protagonist_hurt.png",
+  "ending_friendship": {
+    "bg": "bg/room.jpg",
+    "character": "characters/protagonist_happy.png",
     "name": "Narrator",
-    "text": "Your sister passed away. You fell into deep depression."
+    "text": "Ending 5: You strengthened your friendship. Social success!"
   },
 
-  "ending6": {
-    "bg": "bg/hospital.jpg",
-    "character": "characters/protagonist_paralyzed.png",
+  "ending_adventure": {
+    "bg": "bg/forest.jpg",
+    "character": "characters/protagonist_explorer.png",
     "name": "Narrator",
-    "text": "You survived the accident but became bedridden."
+    "text": "Ending 6: You start a mysterious adventure following the map."
   },
 
-  "extra_ending1": {
-    "bg": "bg/sunset.jpg",
-    "character": "characters/protagonist.png",
+  "ending_normal": {
+    "bg": "bg/school.jpg",
+    "character": "characters/protagonist_neutral.png",
     "name": "Narrator",
-    "text": "An extra ending unlocked!"
-  },
-
-  "extra_ending2": {
-    "bg": "bg/city.jpg",
-    "character": "characters/protagonist.png",
-    "name": "Narrator",
-    "text": "Another secret ending!"
-  },
-
-  "extra_ending3": {
-    "bg": "bg/room_night.jpg",
-    "character": "characters/protagonist.png",
-    "name": "Narrator",
-    "text": "The double suicide scenario ending."
+    "text": "Ending 7: A normal, uneventful day. Nothing special happens."
   }
 }
