@@ -61,6 +61,7 @@ function smartStart(story) {
 
     const visited = save.visited || [];
 
+    // Check for first node with unplayed choices
     for (let nodeId of visited) {
         const node = story[nodeId];
         if (!node || !node.choices) continue;
@@ -73,10 +74,20 @@ function smartStart(story) {
         }
     }
 
-    // Everything played → reset!
-    localStorage.removeItem("vn_save");
-    return "start";
+    // Everything played → prompt user
+    const reset = confirm(
+        "All story branches have been unlocked! Do you want to reset your progress and start over?"
+    );
+
+    if (reset) {
+        localStorage.removeItem("vn_save");
+        return "start";
+    } else {
+        // Keep everything, just go back to main menu
+        return null;
+    }
 }
+
 
 
 // ======================================================
@@ -92,13 +103,21 @@ let currentNode = "start";
 // ======================================================
 
 document.getElementById("start-game").addEventListener("click", () => {
+    const startNode = smartStart(story);
+
+    if (startNode === null) {
+        // User chose NOT to reset → just return to menu
+        alert("Progress not reset. Returning to main menu.");
+        return;
+    }
+
+    // Proceed normally
     document.getElementById("main-menu").style.display = "none";
     document.getElementById("gameplay").style.display = "block";
-
-    const startNode = smartStart(story);
     currentNode = startNode;
     loadNode(startNode);
 });
+
 
 document.getElementById("continue-game").addEventListener("click", () => {
     const save = loadSave();
