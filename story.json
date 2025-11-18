@@ -1,0 +1,93 @@
+/*
+{
+  "start": {
+    "bg": "bg/school.jpg",
+    "character": "characters/protagonist_neutral.png",
+    "name": "Protagonist",
+    "text": "This is the beginning of your story...",
+    "choices": [
+      { "label": "Go to school", "goto": "branch1" },
+      { "label": "Skip class", "goto": "branch2" }
+    ]
+  },
+
+  "branch1": {
+    "bg": "bg/classroom.jpg",
+    "character": "characters/teacher.png",
+    "name": "Teacher",
+    "text": "Welcome to class!",
+    "goto": "ending1"
+  },
+
+  "branch2": {
+    "bg": "bg/office.jpg",
+    "character": "characters/boss_angry.png",
+    "name": "Boss",
+    "text": "Why are you late again?",
+    "goto": "ending2"
+  },
+
+  "ending1": {
+    "bg": "bg/graduation.jpg",
+    "character": "characters/protagonist_happy.png",
+    "name": "Narrator",
+    "text": "You graduated successfully!"
+  },
+
+  "ending2": {
+    "bg": "bg/jail.jpg",
+    "character": "characters/protagonist_sad.png",
+    "name": "Narrator",
+    "text": "You ended up in jail..."
+  },
+
+  "ending3": {
+    "bg": "bg/vegas.jpg",
+    "character": "characters/protagonist_sneaky.png",
+    "name": "Narrator",
+    "text": "You survived the heist and fled the country!"
+  },
+
+  "ending4": {
+    "bg": "bg/prison.jpg",
+    "character": "characters/protagonist_sad.png",
+    "name": "Narrator",
+    "text": "You got caught and served 8 years."
+  },
+
+  "ending5": {
+    "bg": "bg/bedroom.jpg",
+    "character": "characters/protagonist_hurt.png",
+    "name": "Narrator",
+    "text": "Your sister passed away. You fell into deep depression."
+  },
+
+  "ending6": {
+    "bg": "bg/hospital.jpg",
+    "character": "characters/protagonist_paralyzed.png",
+    "name": "Narrator",
+    "text": "You survived the accident but became bedridden."
+  },
+
+  "extra_ending1": {
+    "bg": "bg/sunset.jpg",
+    "character": "characters/protagonist.png",
+    "name": "Narrator",
+    "text": "An extra ending unlocked!"
+  },
+
+  "extra_ending2": {
+    "bg": "bg/city.jpg",
+    "character": "characters/protagonist.png",
+    "name": "Narrator",
+    "text": "Another secret ending!"
+  },
+
+  "extra_ending3": {
+    "bg": "bg/room_night.jpg",
+    "character": "characters/protagonist.png",
+    "name": "Narrator",
+    "text": "The double suicide scenario ending."
+  }
+}
+*/

@@ -1,48 +1,88 @@
-// Start Game
+let story;
+let currentNode = "start";
+
+// --- MENU BUTTONS ---
 document.getElementById("start-game").addEventListener("click", () => {
     document.getElementById("main-menu").style.display = "none";
     document.getElementById("gameplay").style.display = "block";
+    loadNode(currentNode);
 });
 
-// Continue Game (placeholder)
 document.getElementById("continue-game").addEventListener("click", () => {
-    alert("Continue Game clicked");
+    const saved = localStorage.getItem("vnSave");
+    if(saved && story[saved]){
+        currentNode = saved;
+        document.getElementById("main-menu").style.display = "none";
+        document.getElementById("gameplay").style.display = "block";
+        loadNode(currentNode);
+    } else {
+        alert("No save found.");
+    }
 });
 
-// Settings (placeholder)
-document.getElementById("settings").addEventListener("click", () => {
-    alert("Settings clicked");
-});
+document.getElementById("settings").addEventListener("click", () => alert("Settings clicked"));
+document.getElementById("credits").addEventListener("click", () => alert("Credits clicked"));
 
-// Credits (placeholder)
-document.getElementById("credits").addEventListener("click", () => {
-    alert("Credits clicked");
-});
-
-// Exit with animation
 document.getElementById("exit").addEventListener("click", () => {
     document.body.style.transition = "opacity 0.5s";
-    document.body.style.opacity = "0"; // fade out the whole page
-    setTimeout(() => {
-        document.body.innerHTML = ""; // clear everything after fade
-    }, 500);
+    document.body.style.opacity = "0";
+    setTimeout(() => document.body.innerHTML = "", 500);
 });
 
-
-// Return to Menu from ending
 document.getElementById("return-menu").addEventListener("click", () => {
     document.getElementById("ending").style.display = "none";
     document.getElementById("main-menu").style.display = "flex";
 });
 
-function loadAsset(path, placeholderPath) {
-  return fetch(path)
-    .then(res => {
-      if (!res.ok) throw new Error("Asset missing");
-      return res.blob();
-    })
-    .catch(() => fetch(placeholderPath).then(res => res.blob()));
+// --- STORY ENGINE ---
+fetch("story.json")
+    .then(res => res.json())
+    .then(data => story = data);
+
+function loadNode(nodeId) {
+    const node = story[nodeId];
+    if(!node) return;
+
+    // Background
+    document.getElementById("background").style.backgroundImage = `url(${node.bg})`;
+
+    // Character
+    document.getElementById("character").style.backgroundImage = `url(${node.character})`;
+
+    // Dialogue
+    document.getElementById("name-box").innerText = node.name || "";
+    document.getElementById("dialogue-text").innerText = node.text || "";
+
+    // Choices
+    const choicesDiv = document.getElementById("choices");
+    choicesDiv.innerHTML = "";
+
+    if(node.choices){
+        node.choices.forEach(choice => {
+            const btn = document.createElement("button");
+            btn.innerText = choice.label;
+            btn.onclick = () => {
+                currentNode = choice.goto;
+                saveProgress();
+                loadNode(currentNode);
+            };
+            choicesDiv.appendChild(btn);
+        });
+    } else if(node.goto){
+        setTimeout(() => {
+            currentNode = node.goto;
+            saveProgress();
+            loadNode(currentNode);
+        }, 1000);
+    } else {
+        // End node
+        document.getElementById("gameplay").style.display = "none";
+        document.getElementById("ending").style.display = "block";
+        document.getElementById("ending-text").innerText = node.text || "The End";
+    }
 }
 
-// Example usage:
-//loadAsset("assets/cgs/ch1/cg01.png", "public/placeholder_cgs/placeholder_cg1.png");
+// Save progress
+function saveProgress() {
+    localStorage.setItem("vnSave", currentNode);
+}

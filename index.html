@@ -3,41 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-
+    <title>Mini VN</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Main Menu -->
-    <div id="main-menu">
-        <div id="menu-buttons">
-            <button id="start-game">Start</button>
-            <button id="continue-game">Continue</button>
-            <button id="settings">Settings</button>
-            <button id="credits">Credits</button>
-            <button id="exit">Exit</button>
-        </div>
-    </div>
 
-    <!-- Gameplay Container -->
-    <div id="gameplay" style="display:none;">
-        <div id="background"></div> <!-- Background image layer -->
-        <div id="character"></div> <!-- Character sprite layer -->
+<!-- Main Menu -->
+<div id="main-menu">
+    <div id="menu-buttons">
+        <button id="start-game">Start</button>
+        <button id="continue-game">Continue</button>
+        <button id="settings">Settings</button>
+        <button id="credits">Credits</button>
+        <button id="exit">Exit</button>
+    </div>
+</div>
+
+<!-- Gameplay Container -->
+<div id="gameplay" style="display:none;">
+    <div id="background"></div>
+    <div id="character"></div>
+
+    <div id="ui">
+        <div id="name-box"></div>
         <div id="dialogue-box">
-            <p id="dialogue-text"></p> <!-- Text content for dialogue -->
-            <div id="choices"></div> <!-- Buttons for player choices -->
+            <p id="dialogue-text"></p>
+            <div id="choices"></div>
         </div>
     </div>
+</div>
 
-    <!-- Ending Container -->
-    <div id="ending" style="display:none;">
-        <h2>Ending</h2>
-        <p id="ending-text"></p> <!-- Dynamic ending text -->
-        <button id="return-menu">Return to Menu</button>
-    </div>
+<!-- Ending Container -->
+<div id="ending" style="display:none;">
+    <h2>Ending</h2>
+    <p id="ending-text"></p>
+    <button id="return-menu">Return to Menu</button>
+</div>
 
-    <script src="src/engine/engine.js"></script>
+<script src="engine.js"></script>
 </body>
-
-
 </html>
