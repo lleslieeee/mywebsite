@@ -6,7 +6,8 @@
     "text": "This is the beginning of your story...",
     "choices": [
       { "label": "Go to school", "goto": "branch1" },
-      { "label": "Skip class", "goto": "branch2" }
+      { "label": "Skip class", "goto": "branch2" },
+      { "label": "Take a different path", "goto": "secret_path" }
     ]
   },
 
@@ -24,6 +25,26 @@
     "name": "Boss",
     "text": "Why are you late again?",
     "goto": "ending2"
+  },
+
+  "secret_path": {
+    "bg": "bg/forest.jpg",
+    "character": "characters/mysterious.png",
+    "name": "???",
+    "text": "You find a strange person waiting for you. They offer you a choice...",
+    "choices": [
+      { "label": "Follow them to the city", "goto": "extra_ending2" },
+      { "label": "Follow them to the sunset", "goto": "extra_ending1" },
+      { "label": "Ask about the forbidden path", "goto": "dark_branch" }
+    ]
+  },
+
+  "dark_branch": {
+    "bg": "bg/room_night.jpg",
+    "character": "characters/protagonist_sad.png",
+    "name": "Narrator",
+    "text": "You step into a place where the air feels heavy...",
+    "goto": "extra_ending3"
   },
 
   "ending1": {
