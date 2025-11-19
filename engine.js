@@ -96,7 +96,7 @@ function handleNewGame(story) {
 }
 
 // ======================================================
-// TYPEWRITER SYSTEM
+// TYPEWRITER SYSTEM - NUCLEAR FIX
 // ======================================================
 let isTyping = false;
 let fullText = "";
@@ -105,57 +105,79 @@ let charIndex = 0;
 let typingStartTime = 0;
 let typingEndTime = 0;
 let pendingAutoOnDuringTyping = false;
-let postTypingActions = []; // NEW: Store actions to run after typing
+let postTypingActions = [];
 
-function typewriter(text, onComplete, postCompleteActions = []) { // MODIFIED: Added postCompleteActions
-    const box = document.getElementById("dialogue-text");
-    fullText = text || "";
-    revealedText = "";
-    charIndex = 0;
-    isTyping = true;
+function typewriter(text, onComplete, postCompleteActions = []) {
+    console.log("🎬 TYPEWRITER START - isTyping:", isTyping, "text length:", text?.length);
+    
+    // NUCLEAR: Complete reset
+    clearTimeout(autoTimer);
+    isTyping = false;
     pendingAutoOnDuringTyping = false;
-    postTypingActions = postCompleteActions; // NEW: Store post-typing actions
-
+    
+    // Use completely local variables to avoid any state corruption
+    const localFullText = text || "";
+    let localRevealedText = "";
+    let localCharIndex = 0;
+    let localIsTyping = true;
+    const localPostActions = [...postCompleteActions]; // Copy array
+    
+    const box = document.getElementById("dialogue-text");
     box.innerText = "";
     box.style.transition = "";
+
+    // Update globals for external systems only
+    fullText = localFullText;
+    revealedText = localRevealedText;
+    charIndex = localCharIndex;
+    isTyping = localIsTyping;
+    postTypingActions = localPostActions;
 
     const baseSpeed = 28;
     const minSpeed = 12;
     const maxSpeed = 45;
-    const lengthFactor = Math.min(fullText.length / 120, 1);
+    const lengthFactor = Math.min(localFullText.length / 120, 1);
     let speed = baseSpeed - lengthFactor * 12;
     speed = Math.max(minSpeed, Math.min(maxSpeed, speed));
 
     typingStartTime = Date.now();
 
     function tick() {
-        if (charIndex >= fullText.length) {
+        console.log("⏰ TICK - localCharIndex:", localCharIndex, "localFullText length:", localFullText.length);
+        
+        if (localCharIndex >= localFullText.length || !localIsTyping) {
+            console.log("✅ TYPEWRITER COMPLETE");
+            localIsTyping = false;
             isTyping = false;
             typingEndTime = Date.now();
             
-            // NEW: Execute post-typing actions first
-            postTypingActions.forEach(action => action());
-            postTypingActions = [];
+            // Execute post-typing actions
+            localPostActions.forEach(action => action());
             
             onComplete?.();
             return;
         }
 
-        const c = fullText[charIndex];
-        revealedText += c;
-        box.innerText = revealedText;
+        const c = localFullText[localCharIndex];
+        localRevealedText += c;
+        box.innerText = localRevealedText;
+
+        // Update globals
+        revealedText = localRevealedText;
+        charIndex = localCharIndex;
 
         box.style.transform = "scale(1)";
         setTimeout(() => {
             box.style.transform = "scale(1.0)";
         }, 45);
 
-        charIndex++;
+        localCharIndex++;
 
         let delay = speed;
         if (".!?".includes(c)) delay += 180;
         else if (",;:".includes(c)) delay += 80;
 
+        console.log("➡️ Next char in", delay, "ms - current:", c);
         autoTimer = setTimeout(tick, delay);
     }
 
@@ -164,6 +186,9 @@ function typewriter(text, onComplete, postCompleteActions = []) { // MODIFIED: A
 
 function finishTyping() {
     if (!isTyping) return;
+    console.log("🚀 FINISH TYPING MANUALLY");
+    
+    const node = story[currentNode]; // 🆕 Get current node
     const box = document.getElementById("dialogue-text");
     isTyping = false;
 
@@ -173,33 +198,85 @@ function finishTyping() {
     box.innerText = fullText;
     typingEndTime = Date.now();
     
-    // NEW: Execute post-typing actions when manually finishing
+    // Execute post-typing actions
     postTypingActions.forEach(action => action());
     postTypingActions = [];
+    
+    // 🆕 CHECK FOR AUTO-ADVANCE AFTER MANUAL SKIP
+    if (autoAdvance && node && node.goto && !node.choices) {
+        console.log("🚨 MANUAL SKIP -> AUTO ADVANCE TRIGGERED");
+        const delay = computeAutoDelayAfterTyping(node.text || "");
+        clearTimeout(autoTimer);
+        autoTimer = setTimeout(() => loadNode(node.goto), delay);
+    }
 }
 
 // ======================================================
-// AUTO-READ TIMING
+// AUTO-READ TIMING - DEBUG VERSION
 // ======================================================
 
-// returns estimated human read time in milliseconds (not clamped)
 function computeReadingTimeMs(text) {
-    if (!text) return 2000;
+    if (!text) {
+        console.log("📖 READING TIME: No text, returning default 2000ms");
+        return 2000;
+    }
+    
     const words = text.trim().split(/\s+/).length;
-    const WPM = 200; // default, user-setting later
+    const WPM = 200;
     const msPerWord = (60 / WPM) * 1000;
-    return words * msPerWord;
+    const readingTime = words * msPerWord;
+    
+    console.log(`📖 READING TIME: "${text.substring(0, 30)}${text.length > 30 ? '...' : ''}"`);
+    console.log(`   Words: ${words}, WPM: ${WPM}, msPerWord: ${Math.round(msPerWord)}ms`);
+    console.log(`   Calculated: ${readingTime}ms (${Math.round(readingTime/1000)}s)`);
+    
+    return readingTime;
 }
 
-// compute the delay AFTER typing finishes before auto-advancing
-// formula: extraNeeded = readTimeMs - typingDurationMs
-// finalDelayMs = clamp(max(extraNeeded, 2000), 10000)
 function computeAutoDelayAfterTyping(text) {
+    console.log("⏱️  AUTO DELAY CALCULATION START");
+    
     const readMs = computeReadingTimeMs(text);
     const typingDurationMs = Math.max(0, (typingEndTime || Date.now()) - (typingStartTime || Date.now()));
+    
+    console.log(`⏱️  TYPING DURATION: ${typingDurationMs}ms`);
+    console.log(`⏱️  READING TIME: ${readMs}ms`);
+    
     const extraNeeded = readMs - typingDurationMs;
-    const finalDelay = Math.min(Math.max(extraNeeded, 2000), 10000);
+    console.log(`⏱️  EXTRA NEEDED (read - type): ${extraNeeded}ms`);
+    
+    const afterClamp = Math.max(extraNeeded, 2000);
+    console.log(`⏱️  AFTER MIN CLAMP (max with 2000ms): ${afterClamp}ms`);
+    
+    const finalDelay = Math.min(afterClamp, 10000);
+    console.log(`⏱️  FINAL DELAY (min with 10000ms): ${finalDelay}ms`);
+    
+    console.log(`⏱️  FINAL RESULT: Wait ${finalDelay}ms before auto-advance`);
+    console.log("⏱️  AUTO DELAY CALCULATION END");
+    
     return finalDelay;
+}
+
+// ======================================================
+// CLEANUP FUNCTION
+// ======================================================
+
+function cleanupGameState() {
+    console.log("🧹 CLEANING UP GAME STATE");
+    
+    // Clear any pending timers
+    clearTimeout(autoTimer);
+    
+    // Reset typing state
+    isTyping = false;
+    pendingAutoOnDuringTyping = false;
+    postTypingActions = [];
+    
+    // Reset timing variables
+    typingStartTime = 0;
+    typingEndTime = 0;
+    
+    console.log("🧹 Game state cleaned up - timers cleared, typing reset");
 }
 
 // ======================================================
@@ -207,6 +284,7 @@ function computeAutoDelayAfterTyping(text) {
 // ======================================================
 
 document.getElementById("start-game").addEventListener("click", () => {
+    cleanupGameState();
     const startNode = handleNewGame(story);
     
     document.getElementById("main-menu").style.display = "none";
@@ -216,6 +294,7 @@ document.getElementById("start-game").addEventListener("click", () => {
 });
 
 document.getElementById("continue-game").addEventListener("click", () => {
+    cleanupGameState();
     const nextNode = smartContinue(story);
     if (nextNode === null) {
         alert("All branches unlocked. Returning to main menu.");
@@ -228,18 +307,38 @@ document.getElementById("continue-game").addEventListener("click", () => {
     loadNode(nextNode);
 });
 
-document.getElementById("settings").addEventListener("click", () => alert("Settings clicked"));
-document.getElementById("credits").addEventListener("click", () => alert("Credits clicked"));
+// Back buttons for Settings and Credits
+document.getElementById("back-from-settings").addEventListener("click", () => {
+    document.getElementById("settings-menu").style.display = "none";
+    document.getElementById("main-menu").style.display = "flex";
+});
+
+document.getElementById("back-from-credits").addEventListener("click", () => {
+    document.getElementById("credits-menu").style.display = "none";
+    document.getElementById("main-menu").style.display = "flex";
+});
+document.getElementById("settings").addEventListener("click", () => {
+    document.getElementById("main-menu").style.display = "none";
+    document.getElementById("settings-menu").style.display = "flex";
+});
+
+document.getElementById("credits").addEventListener("click", () => {
+    document.getElementById("main-menu").style.display = "none";
+    document.getElementById("credits-menu").style.display = "flex";
+});
 document.getElementById("exit").addEventListener("click", () => {
+    cleanupGameState();
     document.body.style.transition = "opacity 0.5s";
     document.body.style.opacity = "0";
     setTimeout(() => document.body.innerHTML = "", 500);
 });
+
 document.getElementById("return-menu").addEventListener("click", () => {
+    console.log("🏠 RETURNING TO MENU - Cleaning up...");
+    cleanupGameState();
     document.getElementById("ending").style.display = "none";
     document.getElementById("main-menu").style.display = "flex";
 });
-
 
 document.getElementById("auto-toggle").addEventListener("click", () => {
     autoAdvance = !autoAdvance;
@@ -249,22 +348,18 @@ document.getElementById("auto-toggle").addEventListener("click", () => {
 
     const node = story[currentNode];
 
-    // If turning auto ON while typing -> set a pending flag so we treat it specially when typing ends
     if (autoAdvance && isTyping) {
         pendingAutoOnDuringTyping = true;
         return;
     }
 
-    // If turning auto ON and not typing: if node has linear goto, compute delay and start timer
     if (autoAdvance && node && !node.choices && node.goto && !isTyping) {
         clearTimeout(autoTimer);
-        // compute delay based on read time; typingDuration is zero because we're not typing now
         const readMs = computeReadingTimeMs(node.text || "");
         const finalDelay = Math.min(Math.max(readMs, 2000), 10000);
         autoTimer = setTimeout(() => loadNode(node.goto), finalDelay);
     }
 
-    // Turning auto OFF cancels any pending timer
     if (!autoAdvance) {
         pendingAutoOnDuringTyping = false;
         clearTimeout(autoTimer);
@@ -275,17 +370,23 @@ document.getElementById("auto-toggle").addEventListener("click", () => {
 // NODE LOADER
 // ======================================================
 function loadNode(nodeId) {
+    console.log("🔄 LOAD NODE:", nodeId, "current isTyping:", isTyping);
+    
     const node = story[nodeId];
     if (!node) return;
+
+    // Reset typing state before new node
+    if (isTyping) {
+        console.log("🛑 Interrupting previous typing");
+        clearTimeout(autoTimer);
+        isTyping = false;
+    }
+    pendingAutoOnDuringTyping = false;
 
     currentNode = nodeId;
     saveProgress(nodeId);
 
-    clearTimeout(autoTimer);
-    pendingAutoOnDuringTyping = false;
-    postTypingActions = []; // NEW: Clear any pending actions
-
-    // Display background/character/name (name appears instantly per your choice A)
+    // Display background/character/name
     document.getElementById("background").style.backgroundImage = node.bg ? `url(${node.bg})` : "";
     document.getElementById("character").style.backgroundImage = node.character ? `url(${node.character})` : "";
     document.getElementById("name-box").innerText = node.name || "";
@@ -294,13 +395,14 @@ function loadNode(nodeId) {
     const choiceBox = document.getElementById("choices");
     choiceBox.innerHTML = "";
 
-    // NEW: Function to render choices (will be called after typing)
+    // Function to render choices (will be called after typing)
     const renderChoices = () => {
         if (node.choices) {
             node.choices.forEach((choice, index) => {
                 const btn = document.createElement("button");
                 btn.innerText = choice.label;
-                btn.onclick = () => {
+                btn.onclick = (e) => {
+                    e.stopPropagation();
                     clearTimeout(autoTimer);
                     recordChoice(nodeId, index);
                     loadNode(choice.goto);
@@ -310,30 +412,33 @@ function loadNode(nodeId) {
         }
     };
 
-    // MODIFIED: Pass renderChoices as post-typing action
+    // Pass renderChoices as post-typing action
     typewriter(node.text || "", () => {
-        // typing finished callback
-        // if user toggled auto ON during typing -> use a 2s wait before advancing
+        console.log("🔔 TYPING COMPLETE CALLBACK - Auto:", autoAdvance, "Has goto:", node.goto, "Has choices:", node.choices);
+        
         if (pendingAutoOnDuringTyping && autoAdvance && node.goto && !node.choices) {
+            console.log("🚨 USING PENDING AUTO-ON DELAY (2s)");
             pendingAutoOnDuringTyping = false;
             clearTimeout(autoTimer);
             autoTimer = setTimeout(() => loadNode(node.goto), 2000);
             return;
         }
 
-        // if auto is enabled, schedule auto-advance using hybrid formula
         if (autoAdvance && node.goto && !node.choices) {
+            console.log("🚨 COMPUTING AUTO DELAY");
             const delay = computeAutoDelayAfterTyping(node.text || "");
             clearTimeout(autoTimer);
             autoTimer = setTimeout(() => loadNode(node.goto), delay);
+        } else {
+            console.log("🚨 AUTO DELAY NOT TRIGGERED - Conditions:", {
+                autoAdvance,
+                hasGoto: !!node.goto,
+                hasChoices: !!node.choices
+            });
         }
-    }, node.choices ? [renderChoices] : []); // NEW: Pass choices rendering as post-typing action
+    }, node.choices ? [renderChoices] : []);
 
-    // REMOVED: The old immediate choice rendering code
-
-    // If node has a linear goto but auto is off, do nothing here — advancement handled by clicks or auto timer
     if (node.goto && !node.choices) {
-        // If auto is on, a timer will be scheduled after typing finishes (above)
         return;
     }
 
@@ -351,16 +456,13 @@ function loadNode(nodeId) {
 document.getElementById("dialogue-box").addEventListener("click", () => {
     const node = story[currentNode];
 
-    // If typing → finish instantly
     if (isTyping) {
         finishTyping();
         return;
     }
 
-    // If choices exist → do nothing (player must choose)
     if (node && node.choices) return;
 
-    // If there's a next node → advance manually
     if (node && node.goto) {
         clearTimeout(autoTimer);
         loadNode(node.goto);
