@@ -98,15 +98,15 @@ Try the story online: [Live Story](https://lleslieeee.github.io/my-vn-game/)
 
 Edit `story.json` to create new nodes:
 
-  `"node_id": {
-  "bg": "path/to/background.jpg",
-  "character": "path/to/character.png",
-  "name": "Character Name",
-  "text": "Dialogue text...",
-  "choices": [
-    {"label": "Choice 1", "goto": "next_node"}
-  ]
-}`
+       "node_id": {
+       "bg": "path/to/background.jpg",
+       "character": "path/to/character.png",
+       "name": "Character Name",
+       "text": "Dialogue text...",
+       "choices": [
+         {"label": "Choice 1", "goto": "next_node"}
+       ]
+     }
 
 **Styling**
 
