@@ -82,15 +82,15 @@ Edit `story.json` to create new nodes:
        ]
      }
 #
-**Styling**
+- **Styling**
 
 Modify `style.css` to customize colors, fonts, and animations.
 
-**Assets**
+- **Assets**
 
-     - Add backgrounds to `/bg/` folder
+  - Add backgrounds to `/bg/` folder
 
-     - Add character sprites to `/characters/` folder
+  - Add character sprites to `/characters/` folder
 ---
 
 ## 🤝 Contributing
