@@ -45,7 +45,7 @@ Try the story online: [Live Story](https://lleslieeee.github.io/my-vn-game/)
 - **Branching storylines** – multiple endings depending on your choices.  
 - **Styled buttons & animations** – simple but pleasant visuals.  
 - Fully static – no backend needed.  
-- Easy to customize – edit `story.json`, add CSS, images, or new story nodes.  
+- Easy to customize – edit `story.js`, add CSS, images, or new story nodes.  
 
 ---
 
@@ -64,7 +64,7 @@ Try the story online: [Live Story](https://lleslieeee.github.io/my-vn-game/)
 
 ## 🛠️ Customization
 
-- Modify `story.json` to add or change story nodes.  
+- Modify `story.js` to add or change story nodes.  
 - Update `style.css` to adjust visuals.  
 - Add images or animations to enhance the story experience.  
 

@@ -3,111 +3,111 @@
     "bg": "bg/school.jpg",
     "character": "characters/protagonist_neutral.png",
     "name": "Protagonist",
-    "text": "Another school day begins. Do you head straight to class or skip it?",
+    "text": "The morning sunlight streams through the classroom windows, illuminating the familiar scent of chalk and textbooks. Another school day begins. You can feel the hum of chatter and the soft shuffle of shoes in the hallway. Do you head straight to class, skip it, or explore the rooftop where the wind always feels different?",
     "choices": [
-      { "label": "Go to class", "goto": "classroom" },
-      { "label": "Skip class", "goto": "skip_school" },
-      { "label": "Explore the rooftop", "goto": "rooftop" }
+      { "label": "Go to class", "goto": "classroom_1" },
+      { "label": "Skip class", "goto": "skip_school_1" },
+      { "label": "Explore the rooftop", "goto": "rooftop_1" }
     ]
   },
 
-  "classroom": {
+  "classroom_1": {
     "bg": "bg/classroom.jpg",
     "character": "characters/teacher.png",
     "name": "Teacher",
-    "text": "Good morning! Are you ready for the pop quiz?",
+    "text": "You enter the classroom, and the familiar face of your teacher greets you. \"Good morning! Are you ready for today’s pop quiz?\" The desks are neatly arranged, and the sunlight highlights the dust motes in the air. Your friends glance at you, waiting to see if you'll act casual or stressed.",
     "choices": [
-      { "label": "Answer carefully", "goto": "quiz_success" },
-      { "label": "Cheat secretly", "goto": "quiz_cheat" }
+      { "label": "Answer carefully", "goto": "quiz_1" },
+      { "label": "Cheat secretly", "goto": "quiz_cheat_1" }
     ]
   },
 
-  "skip_school": {
-    "bg": "bg/park.jpg",
-    "character": "characters/friend.png",
-    "name": "Friend",
-    "text": "Hey, you skipped class again! Want to grab a snack?",
-    "choices": [
-      { "label": "Yes, let’s go", "goto": "snack_time" },
-      { "label": "No, go wander alone", "goto": "wander_park" }
-    ]
-  },
-
-  "rooftop": {
-    "bg": "bg/rooftop.jpg",
-    "character": "characters/mysterious.png",
-    "name": "???",
-    "text": "You find a mysterious note fluttering in the wind.",
-    "choices": [
-      { "label": "Read the note", "goto": "secret_note" },
-      { "label": "Ignore it", "goto": "ignore_note" }
-    ]
-  },
-
-  "quiz_success": {
+  "quiz_1": {
     "bg": "bg/classroom.jpg",
     "character": "characters/protagonist_happy.png",
     "name": "Narrator",
-    "text": "You answered everything correctly! Feeling proud, you leave school early.",
+    "text": "You take a deep breath and focus, letting the knowledge from late-night studying guide your answers. Each question clicks into place as if pieces of a puzzle finally make sense. Your pen moves confidently across the paper. When the teacher collects the quizzes, you feel a warm sense of pride swell inside you. The bell rings, and you leave the room feeling accomplished.",
     "goto": "ending_success"
   },
 
-  "quiz_cheat": {
+  "quiz_cheat_1": {
     "bg": "bg/classroom.jpg",
     "character": "characters/protagonist_nervous.png",
     "name": "Narrator",
-    "text": "You tried to cheat, but the teacher caught you. You are sent to detention.",
+    "text": "You sneak a glance at your neighbor's paper, hoping the answers will reveal themselves. Just as you write one down, a sharp tap on your shoulder startles you. The teacher is staring at you, disappointment etched across her face. The rest of the class seems to freeze in time as you are sent to detention, the room suddenly feeling much colder than before.",
     "goto": "ending_detention"
   },
 
-  "snack_time": {
-    "bg": "bg/cafe.jpg",
+  "skip_school_1": {
+    "bg": "bg/park.jpg",
     "character": "characters/friend.png",
     "name": "Friend",
-    "text": "The cafe smells amazing. You enjoy a peaceful snack together.",
+    "text": "The streets outside are quiet as you slip past the school gates. Your friend spots you near the park entrance and waves, smiling knowingly. \"Hey, you skipped class again! Want to grab a snack?\" The air smells faintly of grass and autumn leaves, a calm contrast to the chaos of school halls.",
     "choices": [
-      { "label": "Chat about school", "goto": "chat_school" },
-      { "label": "Chat about hobbies", "goto": "chat_hobbies" }
+      { "label": "Yes, let’s go", "goto": "snack_1" },
+      { "label": "No, go wander alone", "goto": "wander_1" }
     ]
   },
 
-  "wander_park": {
+  "snack_1": {
+    "bg": "bg/cafe.jpg",
+    "character": "characters/friend.png",
+    "name": "Friend",
+    "text": "The café is warm, a gentle aroma of coffee and pastries filling the space. You choose a spot by the window and sit across from your friend. The conversation flows easily, laughter mixing with the soft clinking of cups. You share stories, small confessions, and the feeling of freedom that comes from stepping outside your usual routine. Every bite of the snack seems to taste better with this rare quiet moment.",
+    "choices": [
+      { "label": "Chat about school", "goto": "chat_school_1" },
+      { "label": "Chat about hobbies", "goto": "chat_hobbies_1" }
+    ]
+  },
+
+  "wander_1": {
     "bg": "bg/park_alone.jpg",
     "character": "characters/protagonist_neutral.png",
     "name": "Narrator",
-    "text": "You wander alone and find a quiet spot by the fountain. It's peaceful.",
+    "text": "You walk along the winding paths of the park, the leaves rustling softly beneath your feet. Finding a quiet spot by the fountain, you pause to take in the gentle sound of water and birdsong. It's peaceful, and you feel strangely content, appreciating the solitude and the freedom of your choices today. Moments like these are rare, and you treasure them quietly.",
     "goto": "ending_peaceful"
   },
 
-  "chat_school": {
+  "chat_school_1": {
     "bg": "bg/cafe.jpg",
     "character": "characters/friend.png",
     "name": "Friend",
-    "text": "Talking about school makes you realize you need to catch up on assignments.",
+    "text": "Talking about school makes you realize how much you’ve fallen behind on assignments. Your friend offers advice and jokes about the absurdity of some teachers. You make a plan together to catch up later, and despite skipping class, you feel responsible and motivated. The conversation stretches your mind in a way you didn’t expect, blending fun with a little accountability.",
     "goto": "ending_homework"
   },
 
-  "chat_hobbies": {
+  "chat_hobbies_1": {
     "bg": "bg/cafe.jpg",
     "character": "characters/friend.png",
     "name": "Friend",
-    "text": "You share your hobbies and feel more connected with your friend.",
+    "text": "You share your hobbies and dreams, and your friend listens intently. The two of you exchange ideas and make plans to explore a new hobby together. It’s a simple connection, but it deepens your friendship in a meaningful way. You leave the café feeling understood, valued, and genuinely happy to have shared this time.",
     "goto": "ending_friendship"
   },
 
-  "secret_note": {
+  "rooftop_1": {
+    "bg": "bg/rooftop.jpg",
+    "character": "characters/mysterious.png",
+    "name": "???",
+    "text": "The wind is stronger here, tugging at your hair as you step onto the rooftop. You spot a crumpled note fluttering near the edge. Curiosity peaks as you reach for it. The city sprawls below, the usual noises of life softened by the height. You can choose to investigate the note or ignore it and return inside.",
+    "choices": [
+      { "label": "Read the note", "goto": "secret_note_1" },
+      { "label": "Ignore it", "goto": "ignore_note_1" }
+    ]
+  },
+
+  "secret_note_1": {
     "bg": "bg/rooftop.jpg",
     "character": "characters/protagonist_neutral.png",
     "name": "Narrator",
-    "text": "The note contains a mysterious map. Adventure awaits!",
+    "text": "The note contains a mysterious map with cryptic symbols. Your heart races with excitement as possibilities unfold in your mind. An adventure, just for you, seems to begin here. You tuck the note into your pocket, feeling a thrill of discovery. The city looks different now, filled with hidden paths and secret stories waiting to be found.",
     "goto": "ending_adventure"
   },
 
-  "ignore_note": {
+  "ignore_note_1": {
     "bg": "bg/rooftop.jpg",
     "character": "characters/protagonist_neutral.png",
     "name": "Narrator",
-    "text": "You ignore the note and head back inside, nothing exciting happens today.",
+    "text": "You shove the note aside and return to your routine, the thrill of mystery fading quickly. The rest of the day passes normally, filled with ordinary conversations and mundane tasks. Life feels unchanged, calm, and predictable. Sometimes that’s comforting, even if a small part of you wonders what could have been.",
     "goto": "ending_normal"
   },
 
@@ -115,48 +115,48 @@
     "bg": "bg/graduation.jpg",
     "character": "characters/protagonist_happy.png",
     "name": "Narrator",
-    "text": "Ending 1: A successful day! You aced everything and feel accomplished."
+    "text": "Ending 1: A successful day! You aced everything, felt accomplished, and left school with a sense of pride. Every challenge faced today boosted your confidence, making you feel ready for what comes next."
   },
 
   "ending_detention": {
     "bg": "bg/classroom_detention.jpg",
     "character": "characters/protagonist_sad.png",
     "name": "Narrator",
-    "text": "Ending 2: You got caught and spent the rest of the day in detention."
+    "text": "Ending 2: Caught cheating, you spent the rest of the day in detention. The hours crawled slowly, and you reflected on your choices, vowing silently to do better next time."
   },
 
   "ending_peaceful": {
     "bg": "bg/park_alone.jpg",
     "character": "characters/protagonist_relaxed.png",
     "name": "Narrator",
-    "text": "Ending 3: A quiet, peaceful day alone. Sometimes solitude is best."
+    "text": "Ending 3: A quiet, peaceful day alone. Sometimes solitude is the best companion, allowing time for thought and calm observation of the world around you."
   },
 
   "ending_homework": {
     "bg": "bg/room.jpg",
     "character": "characters/protagonist_neutral.png",
     "name": "Narrator",
-    "text": "Ending 4: Back home, you start on your homework. Productive and responsible!"
+    "text": "Ending 4: Back home, you start on your homework, productive and responsible. Though you missed parts of the day, you managed to regain balance and focus on what truly matters."
   },
 
   "ending_friendship": {
     "bg": "bg/room.jpg",
     "character": "characters/protagonist_happy.png",
     "name": "Narrator",
-    "text": "Ending 5: You strengthened your friendship. Social success!"
+    "text": "Ending 5: You strengthened your friendship. Sharing personal moments and interests brought you closer, leaving a warm satisfaction in your heart."
   },
 
   "ending_adventure": {
     "bg": "bg/forest.jpg",
     "character": "characters/protagonist_explorer.png",
     "name": "Narrator",
-    "text": "Ending 6: You start a mysterious adventure following the map."
+    "text": "Ending 6: Following the mysterious map, your adventure begins. The unknown stretches ahead, filled with excitement, danger, and possibilities beyond the ordinary."
   },
 
   "ending_normal": {
     "bg": "bg/school.jpg",
     "character": "characters/protagonist_neutral.png",
     "name": "Narrator",
-    "text": "Ending 7: A normal, uneventful day. Nothing special happens."
+    "text": "Ending 7: A normal, uneventful day. Life goes on, calm and predictable, a reminder that sometimes ordinary days hold subtle value."
   }
 }
