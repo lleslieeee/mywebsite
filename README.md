@@ -40,34 +40,83 @@ Try the story online: [Live Story](https://lleslieeee.github.io/my-vn-game/)
 ---
 
 ## ✨ Features
-
-- **Interactive single-page experience** – no page reloads.  
-- **Branching storylines** – multiple endings depending on your choices.  
-- **Styled buttons & animations** – simple but pleasant visuals.  
-- Fully static – no backend needed.  
-- Easy to customize – edit `story.json`, add CSS, images, or new story nodes.  
+- **7 Unique Endings** - Multiple story paths to discover.
+- **Smart Save System** - Remembers your progress and unexplored choices.
+- **Auto-Advance Mode** - Intelligent reading time calculation.
+- **Typewriter Effects** - Animated text with skip functionality.
+- **Responsive Design** - Works on desktop and mobile.
+- **Interactive single-page experience** – no page reloads.
+- **Styled buttons & animations** – simple but pleasant visuals.
+- **Fully static** – no backend needed.
+- **Easy to customize** – edit `story.json`, add CSS, images, or new story nodes.  
 
 ---
 
-## 📖 Story Paths (Preview)
+## 📖 Story Paths
 
-| Choice Path | Possible Ending |
-|-------------|----------------|
-| Choice A → Choice B | Ending 1 |
-| Choice A → Choice C | Ending 2 |
-| Choice D → Choice E → Choice F | Ending 3 |
-| … | … |
+**Starting Choices**
 
-> Add your own paths to this table as the story grows!
+- **Go to class**
+
+     - Answer carefully → Ending 1: Academic Success
+
+     - Cheat secretly → Ending 2: Detention
+
+- **Skip class**
+
+    - **Grab a snack**
+
+         - Chat about school → Ending 4: Homework
+
+         - Chat about hobbies → Ending 5: Friendship
+
+         - Wander alone → Ending 3: Peaceful Solitude
+
+- **Explore rooftop**
+
+     - Read the note → Ending 6: Adventure Begins
+
+     - Ignore it → Ending 7: Normal Day
+
+## 📖 Endings Guide
+
+| Ending | Title | How to Unlock |
+|-------------|----------------|----------------|
+| Ending 1 | Academic Success | Go to class → Answer carefully |
+| Ending 2 | Detention | Go to class → Cheat secretly |
+| Ending 3 | Peaceful Solitude | Skip class → Wander alone |
+| Ending 4 | Homework | Skip class → Grab snack → Chat school |
+| Ending 5 | Friendship | Skip class → Grab snack → Chat hobbies |
+| Ending 6 | Adventure Begins | Rooftop → Read the note |
+| Ending 7 | Normal Day | Rooftop → Ignore the note |
 
 ---
 
 ## 🛠️ Customization
 
-- Modify `story.json` to add or change story nodes.  
-- Update `style.css` to adjust visuals.  
-- Add images or animations to enhance the story experience.  
+**Modifying the Story**
 
+Edit `story.json` to create new nodes:
+
+  `"node_id": {
+  "bg": "path/to/background.jpg",
+  "character": "path/to/character.png",
+  "name": "Character Name",
+  "text": "Dialogue text...",
+  "choices": [
+    {"label": "Choice 1", "goto": "next_node"}
+  ]
+}`
+
+**Styling**
+
+Modify `style.css` to customize colors, fonts, and animations.
+
+**Assets**
+
+     - Add backgrounds to `/bg/` folder
+
+     - Add character sprites to `/characters/` folder
 ---
 
 ## 🤝 Contributing
@@ -80,7 +129,11 @@ Try the story online: [Live Story](https://lleslieeee.github.io/my-vn-game/)
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE).  
+This project is dual-licensed:
+- **Code**: MIT License
+- **Assets**: Proprietary License
+
+See individual license files for details.
 
 ---
 
