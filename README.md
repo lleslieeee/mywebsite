@@ -68,7 +68,7 @@ Try the story online: [Live Story](https://lleslieeee.github.io/my-vn-game/)
 
 ## 🛠️ Customization
 
-**Modifying the Story**
+- **Modifying the Story**
 
 Edit `story.json` to create new nodes:
 #
