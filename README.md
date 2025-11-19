@@ -52,33 +52,7 @@ Try the story online: [Live Story](https://lleslieeee.github.io/my-vn-game/)
 
 ---
 
-## 📖 Story Paths
-
-**Starting Choices**
-
-- **Go to class**
-
-     - Answer carefully → Ending 1: Academic Success
-
-     - Cheat secretly → Ending 2: Detention
-
-- **Skip class**
-
-    - **Grab a snack**
-
-         - Chat about school → Ending 4: Homework
-
-         - Chat about hobbies → Ending 5: Friendship
-
-         - Wander alone → Ending 3: Peaceful Solitude
-
-- **Explore rooftop**
-
-     - Read the note → Ending 6: Adventure Begins
-
-     - Ignore it → Ending 7: Normal Day
-
-## 📖 Endings Guide
+## 📖 Story Paths/Endings Guide
 
 | Ending | Title | How to Unlock |
 |-------------|----------------|----------------|
@@ -97,7 +71,7 @@ Try the story online: [Live Story](https://lleslieeee.github.io/my-vn-game/)
 **Modifying the Story**
 
 Edit `story.json` to create new nodes:
-
+#
        "node_id": {
        "bg": "path/to/background.jpg",
        "character": "path/to/character.png",
@@ -107,7 +81,7 @@ Edit `story.json` to create new nodes:
          {"label": "Choice 1", "goto": "next_node"}
        ]
      }
-
+#
 **Styling**
 
 Modify `style.css` to customize colors, fonts, and animations.
