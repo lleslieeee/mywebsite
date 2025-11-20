@@ -82,14 +82,24 @@ function handleNewGame(story) {
     const save = loadSave();
     
     if (save && save.visited && save.visited.length > 0) {
-        const reset = confirm(
-            "You have existing progress. Starting a new game will reset your save. Continue?"
-        );
-        
-        if (reset) {
-            localStorage.removeItem("vn_save");
-        }
-
+        // Show custom popup instead of confirm
+        return new Promise((resolve) => {
+            const popup = document.getElementById("custom-popup");
+            popup.style.display = "block";
+            
+            // Reset button - clear save and start new game
+            document.getElementById("popup-reset").onclick = () => {
+                localStorage.removeItem("vn_save");
+                popup.style.display = "none";
+                resolve("start");
+            };
+            
+            // Cancel button - go back to menu
+            document.getElementById("popup-cancel").onclick = () => {
+                popup.style.display = "none";
+                resolve(null);
+            };
+        });
     }
     
     return "start";
@@ -283,14 +293,16 @@ function cleanupGameState() {
 // UPDATED MENU BUTTONS
 // ======================================================
 
-document.getElementById("start-game").addEventListener("click", () => {
+document.getElementById("start-game").addEventListener("click", async () => {
     cleanupGameState();
-    const startNode = handleNewGame(story);
+    const startNode = await handleNewGame(story);
     
-    document.getElementById("main-menu").style.display = "none";
-    document.getElementById("gameplay").style.display = "block";
-    currentNode = startNode;
-    loadNode(startNode);
+    if (startNode) {
+        document.getElementById("main-menu").style.display = "none";
+        document.getElementById("gameplay").style.display = "block";
+        currentNode = startNode;
+        loadNode(startNode);
+    }
 });
 
 document.getElementById("continue-game").addEventListener("click", () => {
@@ -445,9 +457,36 @@ function loadNode(nodeId) {
     // END NODE
     if (!node.goto && !node.choices) {
         document.getElementById("gameplay").style.display = "none";
-        document.getElementById("ending").style.display = "block";
+        document.getElementById("ending").style.display = "flex";
         document.getElementById("ending-text").innerText = node.text || "The End";
+        
+        // Optional: Add different background based on ending type
+        const endingBg = getEndingBackground(nodeId);
+        document.getElementById("ending").style.background = endingBg;
+        
+        // 🆕 Reset and trigger badge animation
+        const badge = document.querySelector('.ending-badge');
+        badge.style.animation = 'none'; // Reset animation
+        void badge.offsetWidth; // Trigger reflow
+        badge.style.animation = 'marioPipeIn 1s ease-out 0.5s both, marioPipeOut 1s ease-in 5.5s both';
     }
+}
+
+// ======================================================
+// ENDING BACKGROUND HELPER
+// ======================================================
+
+function getEndingBackground(endingId) {
+    const backgrounds = {
+        'ending_success': 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+        'ending_detention': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        'ending_peaceful': 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+        'ending_homework': 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+        'ending_friendship': 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+        'ending_adventure': 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
+        'ending_normal': 'linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)'
+    };
+    return backgrounds[endingId] || 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
 }
 
 // ======================================================

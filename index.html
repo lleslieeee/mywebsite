@@ -8,7 +8,6 @@
 </head>
 <body>
 <div id="global-bg"></div>
-
 <!-- Main Menu -->
 <div id="main-menu">
     <div id="menu-buttons">
@@ -19,7 +18,6 @@
         <button id="exit">Exit</button>
     </div>
 </div>
-
 <!-- Gameplay Container -->
 <div id="gameplay" style="display:none;">
     <div id="background"></div>
@@ -34,14 +32,13 @@
         <button id="auto-toggle">Auto-Advance: OFF</button>
     </div>
 </div>
-
 <!-- Ending Container -->
 <div id="ending" style="display:none;">
-    <h2>Ending</h2>
+    <div class="ending-badge">🎉 Ending Reached</div>
+    <h2>Your Journey Ends Here</h2>
     <p id="ending-text"></p>
     <button id="return-menu">Return to Menu</button>
 </div>
-
 <!-- Settings Container -->
 <div id="settings-menu" style="display:none;">
     <div class="submenu-container">
@@ -52,13 +49,12 @@
         </div>
     </div>
 </div>
-
 <!-- Credits Container -->
 <div id="credits-menu" style="display:none;">
     <div class="submenu-container">
         <h2>Credits</h2>
         <div class="credits-content">
-            <p><strong>Game Engine</strong><br>Custom-built Visual Novel System</p>
+            <p><strong>Game Engine</strong><br>Original VNJS Engine<br>(Visual Novel JavaScript)</p>
             <p><strong>Story & Code</strong><br>lleslieeee</p>
             <p><strong>Special Thanks</strong><br>You, for playing!</p>
         </div>
@@ -67,7 +63,19 @@
         </div>
     </div>
 </div>
-
+<!-- Custom Popup Container -->
+<div id="custom-popup" style="display:none;">
+    <div class="popup-overlay">
+        <div class="popup-content">
+            <h3>Reset Progress?</h3>
+            <p>You have existing progress. Starting a new game will reset your save. Continue?</p>
+            <div class="popup-buttons">
+                <button id="popup-reset" class="popup-btn reset-btn">Reset</button>
+                <button id="popup-cancel" class="popup-btn cancel-btn">Go Back</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="engine.js"></script>
 </body>
 </html>

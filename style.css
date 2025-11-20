@@ -5,7 +5,6 @@
     background: #999;
     z-index: -10;
 }
-
 /* === MAIN MENU STYLES === */
 #main-menu {
     display: flex;
@@ -13,13 +12,11 @@
     align-items: center;
     height: 100vh;
 }
-
 #menu-buttons {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
-
 #menu-buttons button {
     width: 200px;
     padding: 12px 20px;
@@ -31,12 +28,10 @@
     cursor: pointer;
     transition: 0.2s;
 }
-
 #menu-buttons button:hover {
     background: #ddd;
     transform: translateY(-2px);
 }
-
 /* === SETTINGS & CREDITS MENUS === */
 #settings-menu, #credits-menu {
     position: fixed;
@@ -49,7 +44,6 @@
     align-items: center;
     background: rgba(0, 0, 0, 0.8);
 }
-
 .submenu-container {
     background: #fff;
     padding: 30px;
@@ -59,42 +53,35 @@
     width: 90%;
     text-align: center;
 }
-
 .submenu-container h2 {
     margin-bottom: 20px;
     color: #333;
     font-size: 2rem;
 }
-
 .submenu-container p {
     margin-bottom: 20px;
     color: #666;
     line-height: 1.6;
 }
-
 .credits-content {
     text-align: left;
     margin-bottom: 25px;
 }
-
 .credits-content p {
     margin-bottom: 15px;
     padding-bottom: 15px;
     border-bottom: 1px solid #eee;
 }
-
 .credits-content strong {
     color: #333;
     display: block;
     margin-bottom: 5px;
 }
-
 .submenu-buttons {
     display: flex;
     justify-content: center;
     gap: 15px;
 }
-
 .submenu-buttons button {
     padding: 12px 25px;
     font-size: 16px;
@@ -105,12 +92,10 @@
     cursor: pointer;
     transition: 0.2s;
 }
-
 .submenu-buttons button:hover {
     background: #ddd;
     transform: translateY(-2px);
 }
-
 /* === GAMEPLAY VISUAL STYLES === */
 #background {
     position: absolute;
@@ -119,7 +104,6 @@
     background-size: cover;
     background-position: center;
 }
-
 #character {
     position: absolute;
     bottom: 0;
@@ -129,7 +113,6 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
-
 /* === GAMEPLAY UI STYLES === */
 #ui {
     position: absolute;
@@ -142,7 +125,6 @@
     gap: 5px;
     font-family: 'Verdana', sans-serif;
 }
-
 #name-box {
     align-self: flex-start;
     margin-left: 20px;
@@ -153,7 +135,6 @@
     font-size: 1.1rem;
     border-radius: 5px 5px 0 0;
 }
-
 #dialogue-box {
     width: 90%;
     background: rgba(0, 0, 0, 0.6);
@@ -167,12 +148,10 @@
     flex-direction: column;
     gap: 10px;
 }
-
 /* Dialogue text */
 #dialogue-text {
     margin: 0;
 }
-
 /* Choices */
 #choices {
     display: flex;
@@ -180,7 +159,6 @@
     gap: 8px;
     margin-top: 5px;
 }
-
 #choices button {
     background: rgba(255, 255, 255, 0.1);
     color: #fff;
@@ -191,12 +169,10 @@
     font-size: 1rem;
     transition: 0.2s;
 }
-
 #choices button:hover {
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255,255,255,0.6);
 }
-
 /* Auto toggle */
 #auto-toggle {
     margin-top: 5px;
@@ -209,21 +185,217 @@
     font-size: 0.9rem;
     transition: 0.2s;
 }
-
 #auto-toggle:hover {
     background: rgba(255,255,255,0.2);
     border-color: rgba(255,255,255,0.6);
 }
-
 /* === POINTER EVENTS MANAGEMENT === */
 #choices, #choices button {
     pointer-events: auto;
 }
-
 #dialogue-box {
     pointer-events: none;
 }
-
 #dialogue-box > * {
     pointer-events: auto;
+}
+/* === CUSTOM POPUP STYLES === */
+#custom-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+.popup-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.popup-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+}
+.popup-content h3 {
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 1.5rem;
+}
+.popup-content p {
+    margin-bottom: 25px;
+    color: #666;
+    line-height: 1.5;
+}
+.popup-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+.popup-btn {
+    padding: 12px 25px;
+    font-size: 16px;
+    border: 2px solid;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    min-width: 100px;
+}
+.reset-btn {
+    background: #ff4444;
+    color: white;
+    border-color: #cc0000;
+}
+.reset-btn:hover {
+    background: #cc0000;
+    transform: translateY(-2px);
+}
+.cancel-btn {
+    background: #eee;
+    color: #222;
+    border-color: #444;
+}
+.cancel-btn:hover {
+    background: #ddd;
+    transform: translateY(-2px);
+}
+/* === ENDING PAGE STYLES === */
+#ending {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+#ending h2 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    animation: fadeInUp 0.8s ease-out;
+}
+#ending-text {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+#return-menu {
+    padding: 15px 35px;
+    font-size: 1.2rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+#return-menu:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+/* Animation for ending elements */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ending-badge {
+    position: absolute;
+    bottom: 90px;
+    right: 50px;
+    background: rgba(255, 255, 255, 0.25);
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    z-index: 10;
+    max-width: 200px;
+    text-align: center;
+    white-space: nowrap;
+    transform-origin: bottom center;
+}
+
+@keyframes marioPipeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(100%) scaleY(0.1) scaleX(0.8);
+    }
+    40% {
+        opacity: 1;
+        transform: translateY(-20px) scaleY(1.1) scaleX(1.05);
+    }
+    70% {
+        transform: translateY(10px) scaleY(0.95) scaleX(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scaleY(1) scaleX(1);
+    }
+}
+
+@keyframes marioPipeOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scaleY(1) scaleX(1);
+    }
+    30% {
+        opacity: 0.8;
+        transform: translateY(-15px) scaleY(1.05) scaleX(1.02);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100%) scaleY(0.1) scaleX(0.8);
+    }
+}
+
+@media (max-width: 480px) {
+    .ending-badge {
+        bottom: 20px;
+        right: 20px;
+        left: 20px;
+        max-width: none;
+        margin: 0 auto;
+        transform-origin: bottom center;
+    }
 }
