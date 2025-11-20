@@ -1,21 +1,29 @@
 {
   "start": {
     "bg": "bg/school.jpg",
-    "character": "characters/protagonist_neutral.png",
+    "music": "bgm/morning.mp3",
+    "transition_in": "fade_500ms",
     "name": "Protagonist",
     "text": "The morning sunlight streams through the classroom windows, illuminating the familiar scent of chalk and textbooks. Another school day begins. You can feel the hum of chatter and the soft shuffle of shoes in the hallway. Do you head straight to class, skip it, or explore the rooftop where the wind always feels different?",
+    "characters": [
+      { "id": "protagonist", "sprite": "characters/protagonist_neutral.png", "pos": "center" }
+    ],
     "choices": [
-      { "label": "Go to class", "goto": "classroom_1" },
-      { "label": "Skip class", "goto": "skip_school_1" },
+      { "label": "Go to class", "goto": "classroom_1", "action": ["set_var(study_level, 5)"] },
+      { "label": "Skip class", "goto": "skip_school_1", "action": ["set_var(study_level, 0)"] },
       { "label": "Explore the rooftop", "goto": "rooftop_1" }
     ]
   },
 
   "classroom_1": {
     "bg": "bg/classroom.jpg",
-    "character": "characters/teacher.png",
+    "music": "bgm/tension.mp3",
+    "transition_in": "quick_fade_200ms",
     "name": "Teacher",
-    "text": "You enter the classroom, and the familiar face of your teacher greets you. \"Good morning! Are you ready for today’s pop quiz?\" The desks are neatly arranged, and the sunlight highlights the dust motes in the air. Your friends glance at you, waiting to see if you'll act casual or stressed.",
+    "text": "You enter the classroom, and the familiar face of your teacher greets you. \"Good morning! Are you ready for today’s pop quiz?\" The desks are neatly arranged. Your friends glance at you, waiting to see if you'll act casual or stressed.",
+    "characters": [
+      { "id": "teacher", "sprite": "characters/teacher.png", "pos": "center" }
+    ],
     "choices": [
       { "label": "Answer carefully", "goto": "quiz_1" },
       { "label": "Cheat secretly", "goto": "quiz_cheat_1" }
@@ -24,139 +32,220 @@
 
   "quiz_1": {
     "bg": "bg/classroom.jpg",
-    "character": "characters/protagonist_happy.png",
+    "music": "bgm/calm.mp3",
+    "sound": "sfx/pen_scribble.wav",
     "name": "Narrator",
-    "text": "You take a deep breath and focus, letting the knowledge from late-night studying guide your answers. Each question clicks into place as if pieces of a puzzle finally make sense. Your pen moves confidently across the paper. When the teacher collects the quizzes, you feel a warm sense of pride swell inside you. The bell rings, and you leave the room feeling accomplished.",
+    "text": "You take a deep breath and focus, letting the knowledge from late-night studying guide your answers. When the teacher collects the quizzes, you feel a warm sense of pride swell inside you. The bell rings, and you leave the room feeling accomplished.",
+    "characters": [
+      { "id": "protagonist", "sprite": "characters/protagonist_happy.png", "pos": "center" }
+    ],
+    "action": ["increment(study_level, 10)"],
     "goto": "ending_success"
   },
 
   "quiz_cheat_1": {
     "bg": "bg/classroom.jpg",
-    "character": "characters/protagonist_nervous.png",
+    "music": "bgm/detention.mp3",
+    "sound": "sfx/desk_tap.wav",
     "name": "Narrator",
-    "text": "You sneak a glance at your neighbor's paper, hoping the answers will reveal themselves. Just as you write one down, a sharp tap on your shoulder startles you. The teacher is staring at you, disappointment etched across her face. The rest of the class seems to freeze in time as you are sent to detention, the room suddenly feeling much colder than before.",
+    "text": "You sneak a glance at your neighbor's paper. Just as you write one down, a sharp tap on your shoulder startles you. The teacher is staring at you, disappointment etched across her face. You are sent to detention.",
+    "characters": [
+      { "id": "protagonist", "sprite": "characters/protagonist_nervous.png", "pos": "center" }
+    ],
+    "action": ["set_var(study_level, -5)"],
     "goto": "ending_detention"
   },
 
   "skip_school_1": {
     "bg": "bg/park.jpg",
-    "character": "characters/friend.png",
+    "music": "bgm/walk_light.mp3",
     "name": "Friend",
-    "text": "The streets outside are quiet as you slip past the school gates. Your friend spots you near the park entrance and waves, smiling knowingly. \"Hey, you skipped class again! Want to grab a snack?\" The air smells faintly of grass and autumn leaves, a calm contrast to the chaos of school halls.",
+    "text": "The streets outside are quiet as you slip past the school gates. Your friend spots you near the park entrance and waves, smiling knowingly. \"Hey, you skipped class again! Want to grab a snack?\"",
+    "characters": [
+      { "id": "friend", "sprite": "characters/friend.png", "pos": "center" }
+    ],
+    "action": ["set_var(friendship_score, 10)"],
     "choices": [
       { "label": "Yes, let’s go", "goto": "snack_1" },
-      { "label": "No, go wander alone", "goto": "wander_1" }
+      { 
+        "label": "No, go wander alone", 
+        "goto": "wander_1", 
+        "action": ["decrement(friendship_score, 5)"] 
+      }
     ]
   },
 
   "snack_1": {
     "bg": "bg/cafe.jpg",
-    "character": "characters/friend.png",
+    "music": "bgm/cafe.mp3",
+    "transition_in": "slide_right",
     "name": "Friend",
-    "text": "The café is warm, a gentle aroma of coffee and pastries filling the space. You choose a spot by the window and sit across from your friend. The conversation flows easily, laughter mixing with the soft clinking of cups. You share stories, small confessions, and the feeling of freedom that comes from stepping outside your usual routine. Every bite of the snack seems to taste better with this rare quiet moment.",
+    "text": "The café is warm, a gentle aroma of coffee and pastries filling the space. You share stories, small confessions, and the feeling of freedom. Every bite seems to taste better with this rare quiet moment.",
+    "characters": [
+      { "id": "friend", "sprite": "characters/friend.png", "pos": "left" },
+      { "id": "protagonist", "sprite": "characters/protagonist_relaxed.png", "pos": "right" }
+    ],
     "choices": [
-      { "label": "Chat about school", "goto": "chat_school_1" },
-      { "label": "Chat about hobbies", "goto": "chat_hobbies_1" }
+      { 
+        "label": "Chat about school (Focus on Catch-Up)", 
+        "goto": "chat_school_1",
+        "condition": "friendship_score > 5" 
+      },
+      { 
+        "label": "Chat about hobbies (Deepen Bond)", 
+        "goto": "chat_hobbies_1",
+        "condition": "friendship_score >= 10" 
+      }
     ]
   },
 
   "wander_1": {
     "bg": "bg/park_alone.jpg",
-    "character": "characters/protagonist_neutral.png",
+    "music": "bgm/solo.mp3",
     "name": "Narrator",
-    "text": "You walk along the winding paths of the park, the leaves rustling softly beneath your feet. Finding a quiet spot by the fountain, you pause to take in the gentle sound of water and birdsong. It's peaceful, and you feel strangely content, appreciating the solitude and the freedom of your choices today. Moments like these are rare, and you treasure them quietly.",
+    "text": "You walk along the winding paths of the park, the leaves rustling softly beneath your feet. Finding a quiet spot by the fountain, you pause. It's peaceful, and you feel strangely content, appreciating the solitude and the freedom of your choices today.",
+    "characters": [
+      { "id": "protagonist", "sprite": "characters/protagonist_neutral.png", "pos": "center" }
+    ],
     "goto": "ending_peaceful"
   },
 
   "chat_school_1": {
     "bg": "bg/cafe.jpg",
-    "character": "characters/friend.png",
+    "music": "bgm/cafe.mp3",
     "name": "Friend",
-    "text": "Talking about school makes you realize how much you’ve fallen behind on assignments. Your friend offers advice and jokes about the absurdity of some teachers. You make a plan together to catch up later, and despite skipping class, you feel responsible and motivated. The conversation stretches your mind in a way you didn’t expect, blending fun with a little accountability.",
+    "text": "Talking about school makes you realize how much you’ve fallen behind. Your friend offers advice. You make a plan together to catch up later, and despite skipping class, you feel responsible and motivated.",
+    "characters": [
+      { "id": "friend", "sprite": "characters/friend_happy.png", "pos": "left" }
+    ],
+    "action": ["increment(study_level, 5)", "increment(friendship_score, 2)"],
     "goto": "ending_homework"
   },
 
   "chat_hobbies_1": {
     "bg": "bg/cafe.jpg",
-    "character": "characters/friend.png",
+    "music": "bgm/cafe.mp3",
     "name": "Friend",
-    "text": "You share your hobbies and dreams, and your friend listens intently. The two of you exchange ideas and make plans to explore a new hobby together. It’s a simple connection, but it deepens your friendship in a meaningful way. You leave the café feeling understood, valued, and genuinely happy to have shared this time.",
+    "text": "You share your hobbies and dreams, and your friend listens intently. The two of you exchange ideas and make plans to explore a new hobby together. This deepens your friendship in a meaningful way.",
+    "characters": [
+      { "id": "friend", "sprite": "characters/friend_happy.png", "pos": "left" }
+    ],
+    "action": ["increment(friendship_score, 10)"],
     "goto": "ending_friendship"
   },
 
   "rooftop_1": {
     "bg": "bg/rooftop.jpg",
-    "character": "characters/mysterious.png",
+    "music": "bgm/mystery.mp3",
     "name": "???",
-    "text": "The wind is stronger here, tugging at your hair as you step onto the rooftop. You spot a crumpled note fluttering near the edge. Curiosity peaks as you reach for it. The city sprawls below, the usual noises of life softened by the height. You can choose to investigate the note or ignore it and return inside.",
+    "text": "The wind is stronger here. You spot a crumpled note fluttering near the edge. Curiosity peaks as you reach for it. You can choose to investigate the note or ignore it and return inside.",
+    "characters": [
+      { "id": "mysterious", "sprite": "characters/mysterious.png", "pos": "center" }
+    ],
     "choices": [
-      { "label": "Read the note", "goto": "secret_note_1" },
-      { "label": "Ignore it", "goto": "ignore_note_1" }
+      { 
+        "label": "Read the note", 
+        "goto": "secret_note_1", 
+        "action": ["set_flag(has_secret_note, true)"] 
+      },
+      { 
+        "label": "Ignore it", 
+        "goto": "ignore_note_1"
+      }
     ]
   },
 
   "secret_note_1": {
     "bg": "bg/rooftop.jpg",
-    "character": "characters/protagonist_neutral.png",
+    "music": "bgm/adventure_start.mp3",
+    "sound": "sfx/paper_rustle.wav",
     "name": "Narrator",
-    "text": "The note contains a mysterious map with cryptic symbols. Your heart races with excitement as possibilities unfold in your mind. An adventure, just for you, seems to begin here. You tuck the note into your pocket, feeling a thrill of discovery. The city looks different now, filled with hidden paths and secret stories waiting to be found.",
+    "text": "The note contains a mysterious map with cryptic symbols. Your heart races with excitement as possibilities unfold in your mind. An adventure, just for you, seems to begin here. You tuck the note into your pocket, feeling a thrill of discovery.",
+    "characters": [
+      { "id": "protagonist", "sprite": "characters/protagonist_neutral.png", "pos": "center" }
+    ],
     "goto": "ending_adventure"
   },
 
   "ignore_note_1": {
     "bg": "bg/rooftop.jpg",
-    "character": "characters/protagonist_neutral.png",
+    "music": "bgm/morning.mp3",
     "name": "Narrator",
-    "text": "You shove the note aside and return to your routine, the thrill of mystery fading quickly. The rest of the day passes normally, filled with ordinary conversations and mundane tasks. Life feels unchanged, calm, and predictable. Sometimes that’s comforting, even if a small part of you wonders what could have been.",
+    "text": "You shove the note aside and return to your routine, the thrill of mystery fading quickly. The rest of the day passes normally, calm, and predictable.",
+    "characters": [
+      { "id": "protagonist", "sprite": "characters/protagonist_neutral.png", "pos": "center" }
+    ],
     "goto": "ending_normal"
   },
 
   "ending_success": {
     "bg": "bg/graduation.jpg",
-    "character": "characters/protagonist_happy.png",
+    "music": "bgm/fanfare.mp3",
+    "transition_in": "flash_white_500ms",
     "name": "Narrator",
-    "text": "Ending 1: A successful day! You aced everything, felt accomplished, and left school with a sense of pride. Every challenge faced today boosted your confidence, making you feel ready for what comes next."
+    "text": "Ending 1: **A successful day!** You aced everything, felt accomplished, and left school with a sense of pride. Study level: {study_level}!",
+    "characters": [
+      { "id": "protagonist", "sprite": "characters/protagonist_happy.png", "pos": "center" }
+    ]
   },
 
   "ending_detention": {
     "bg": "bg/classroom_detention.jpg",
-    "character": "characters/protagonist_sad.png",
+    "music": "bgm/sad_piano.mp3",
     "name": "Narrator",
-    "text": "Ending 2: Caught cheating, you spent the rest of the day in detention. The hours crawled slowly, and you reflected on your choices, vowing silently to do better next time."
+    "text": "Ending 2: **Caught cheating,** you spent the rest of the day in detention. The hours crawled slowly. Your study level is now: {study_level}.",
+    "characters": [
+      { "id": "protagonist", "sprite": "characters/protagonist_sad.png", "pos": "center" }
+    ]
   },
 
   "ending_peaceful": {
-    "bg": "bg/park_alone.jpg",
-    "character": "characters/protagonist_relaxed.png",
+    "bg": "bg/sunset.jpg",
+    "music": "bgm/peaceful.mp3",
     "name": "Narrator",
-    "text": "Ending 3: A quiet, peaceful day alone. Sometimes solitude is the best companion, allowing time for thought and calm observation of the world around you."
+    "text": "Ending 3: **Solitary Peace.** You chose to wander alone, finding quiet satisfaction in your freedom. Your friendship score is {friendship_score}.",
+    "characters": [
+      { "id": "protagonist", "sprite": "characters/protagonist_neutral.png", "pos": "center" }
+    ]
   },
 
   "ending_homework": {
-    "bg": "bg/room.jpg",
-    "character": "characters/protagonist_neutral.png",
+    "bg": "bg/study_desk.jpg",
+    "music": "bgm/work.mp3",
     "name": "Narrator",
-    "text": "Ending 4: Back home, you start on your homework, productive and responsible. Though you missed parts of the day, you managed to regain balance and focus on what truly matters."
+    "text": "Ending 4: **Focused Future.** You and your friend made a plan to study, turning a skipped day into a motivation boost. Study level: {study_level}.",
+    "characters": [
+      { "id": "protagonist", "sprite": "characters/protagonist_determined.png", "pos": "center" }
+    ]
   },
-
+  
   "ending_friendship": {
     "bg": "bg/room.jpg",
-    "character": "characters/protagonist_happy.png",
+    "music": "bgm/friendship.mp3",
     "name": "Narrator",
-    "text": "Ending 5: You strengthened your friendship. Sharing personal moments and interests brought you closer, leaving a warm satisfaction in your heart."
+    "text": "Ending 5: **A Deep Bond.** You strengthened your friendship by sharing personal moments. Your high friendship score: {friendship_score}.",
+    "characters": [
+      { "id": "protagonist", "sprite": "characters/protagonist_happy.png", "pos": "center" }
+    ]
   },
 
   "ending_adventure": {
-    "bg": "bg/forest.jpg",
-    "character": "characters/protagonist_explorer.png",
+    "bg": "bg/map_close.jpg",
+    "music": "bgm/climax.mp3",
     "name": "Narrator",
-    "text": "Ending 6: Following the mysterious map, your adventure begins. The unknown stretches ahead, filled with excitement, danger, and possibilities beyond the ordinary."
+    "text": "Ending 6: **The Start of an Adventure.** The mysterious note set you on a new path of discovery. The flag 'has_secret_note' is {has_secret_note}. The real game begins now!",
+    "characters": [
+      { "id": "protagonist", "sprite": "characters/protagonist_excited.png", "pos": "center" }
+    ]
   },
-
+  
   "ending_normal": {
-    "bg": "bg/school.jpg",
-    "character": "characters/protagonist_neutral.png",
+    "bg": "bg/normal_street.jpg",
+    "music": "bgm/morning.mp3",
     "name": "Narrator",
-    "text": "Ending 7: A normal, uneventful day. Life goes on, calm and predictable, a reminder that sometimes ordinary days hold subtle value."
+    "text": "Ending 7: **The Normal Day.** You ignored the mystery and returned to routine. Predictable, but calm. Study level: {study_level}.",
+    "characters": [
+      { "id": "protagonist", "sprite": "characters/protagonist_neutral.png", "pos": "center" }
+    ]
   }
 }
